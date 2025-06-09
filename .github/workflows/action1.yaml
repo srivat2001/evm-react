@@ -1,0 +1,20 @@
+name: test
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if PR is opened
+        if: ${{ github.event.action == 'opened' }}
+        run: echo "Pull request opened ✅"
+
+      - name: Check if PR is closed
+        if: ${{ github.event.action == 'closed' }}
+        run: echo "Pull request closed ❌"
